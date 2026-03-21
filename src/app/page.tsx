@@ -80,6 +80,7 @@ export default function Home() {
             <a href="#sources" className="text-zinc-400 hover:text-white transition-colors hidden sm:block">Sources</a>
             <a href="#pricing" className="text-zinc-400 hover:text-white transition-colors">Pricing</a>
             <a href="/docs" className="text-zinc-400 hover:text-white transition-colors">Docs</a>
+            <a href="/dashboard" className="text-zinc-400 hover:text-white transition-colors hidden sm:block">Dashboard</a>
           </div>
         </div>
       </nav>

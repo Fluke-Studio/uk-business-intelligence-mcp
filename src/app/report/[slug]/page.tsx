@@ -1,0 +1,413 @@
+import type { Metadata } from 'next';
+import { enrichBusiness } from '@/lib/services/enrichment';
+import { EnrichedBusinessProfile } from '@/lib/schemas/response';
+
+export const revalidate = 86400; // 24 hours
+
+function parseSlug(slug: string): { businessName: string; location: string } {
+  const parts = slug.split('-');
+  if (parts.length < 2) {
+    return {
+      businessName: capitalize(slug),
+      location: '',
+    };
+  }
+  const location = parts[parts.length - 1];
+  const businessName = parts.slice(0, -1).join(' ');
+  return {
+    businessName: capitalize(businessName),
+    location: capitalize(location),
+  };
+}
+
+function capitalize(str: string): string {
+  return str
+    .split(' ')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(' ');
+}
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const { businessName, location } = parseSlug(slug);
+  const title = `${businessName} - Business Report | UK Business Intelligence`;
+  const description = `Company records, Google reviews, website status, and social media for ${businessName}${location ? ` in ${location}` : ''}`;
+  return {
+    title,
+    description,
+    openGraph: { title, description },
+  };
+}
+
+function StatusBadge({ ok, labelTrue, labelFalse }: { ok: boolean | null; labelTrue: string; labelFalse: string }) {
+  if (ok === null) return <span className="text-xs text-zinc-500">Unknown</span>;
+  return ok ? (
+    <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+      <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full" />
+      {labelTrue}
+    </span>
+  ) : (
+    <span className="inline-flex items-center gap-1 text-xs font-medium text-red-400 bg-red-500/10 px-2 py-0.5 rounded-full border border-red-500/20">
+      <span className="w-1.5 h-1.5 bg-red-400 rounded-full" />
+      {labelFalse}
+    </span>
+  );
+}
+
+function StarRating({ rating }: { rating: number | null }) {
+  if (rating === null) return <span className="text-zinc-500 text-sm">No rating</span>;
+  const full = Math.floor(rating);
+  const half = rating - full >= 0.5;
+  const empty = 5 - full - (half ? 1 : 0);
+  return (
+    <div className="flex items-center gap-1.5">
+      <div className="flex gap-0.5">
+        {Array.from({ length: full }).map((_, i) => (
+          <span key={`f${i}`} className="text-amber-400">&#9733;</span>
+        ))}
+        {half && <span className="text-amber-400/50">&#9733;</span>}
+        {Array.from({ length: empty }).map((_, i) => (
+          <span key={`e${i}`} className="text-zinc-700">&#9733;</span>
+        ))}
+      </div>
+      <span className="text-sm font-semibold text-white">{rating.toFixed(1)}</span>
+    </div>
+  );
+}
+
+function SocialLink({ platform, url }: { platform: string; url: string | null }) {
+  const icons: Record<string, string> = {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    linkedin: 'LinkedIn',
+    twitter: 'Twitter / X',
+  };
+  const label = icons[platform] || platform;
+  if (!url) {
+    return (
+      <div className="flex items-center justify-between py-2">
+        <span className="text-sm text-zinc-400">{label}</span>
+        <span className="text-xs text-zinc-600">Not found</span>
+      </div>
+    );
+  }
+  return (
+    <div className="flex items-center justify-between py-2">
+      <span className="text-sm text-zinc-300">{label}</span>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors truncate max-w-[180px]"
+      >
+        {url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+      </a>
+    </div>
+  );
+}
+
+function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
+  return (
+    <div className="flex items-start justify-between py-2 border-b border-zinc-800/50 last:border-0">
+      <span className="text-sm text-zinc-500 shrink-0">{label}</span>
+      <span className="text-sm text-zinc-200 text-right ml-4">{value ?? <span className="text-zinc-600">-</span>}</span>
+    </div>
+  );
+}
+
+function ReportContent({ data, businessName, location }: { data: EnrichedBusinessProfile; businessName: string; location: string }) {
+  const ch = data.companies_house;
+  const gp = data.google_places;
+  const web = data.website;
+  const social = data.social;
+  const meta = data.meta;
+
+  return (
+    <>
+      {/* Hero */}
+      <section className="pt-28 pb-12 px-6">
+        <div className="max-w-5xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 text-xs font-medium px-3 py-1.5 rounded-full mb-6 border border-emerald-500/20">
+            Report generated by UK Business Intelligence API
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">
+            {ch.company_name || gp.display_name || businessName}
+          </h1>
+          {location && (
+            <p className="text-lg text-zinc-400">{gp.formatted_address || location}</p>
+          )}
+        </div>
+      </section>
+
+      {/* Cards grid */}
+      <section className="pb-16 px-6">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6">
+          {/* Companies House */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <h2 className="font-semibold">Companies House</h2>
+            </div>
+            <div className="space-y-0">
+              <InfoRow label="Status" value={
+                ch.company_status ? (
+                  <StatusBadge
+                    ok={ch.company_status.toLowerCase() === 'active'}
+                    labelTrue="Active"
+                    labelFalse={capitalize(ch.company_status)}
+                  />
+                ) : null
+              } />
+              <InfoRow label="Company No." value={ch.company_number} />
+              <InfoRow label="Incorporated" value={ch.incorporation_date} />
+              <InfoRow label="Type" value={ch.company_type} />
+              {ch.sic_codes.length > 0 && (
+                <InfoRow label="SIC Codes" value={ch.sic_codes.join(', ')} />
+              )}
+            </div>
+            {ch.directors.length > 0 && (
+              <div className="mt-4 pt-4 border-t border-zinc-800">
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-zinc-500 mb-3">Directors</h3>
+                <div className="space-y-2">
+                  {ch.directors.map((dir, i) => (
+                    <div key={i} className="flex items-center justify-between text-sm">
+                      <span className="text-zinc-300">{dir.name}</span>
+                      <span className="text-xs text-zinc-500">{dir.role}{dir.resigned_on ? ' (resigned)' : ''}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Google Places */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h2 className="font-semibold">Google Places</h2>
+            </div>
+            <div className="mb-4">
+              <StarRating rating={gp.rating} />
+              {gp.review_count !== null && (
+                <p className="text-xs text-zinc-500 mt-1">{gp.review_count.toLocaleString()} reviews</p>
+              )}
+            </div>
+            <div className="space-y-0">
+              <InfoRow label="Phone" value={gp.phone} />
+              <InfoRow label="Website" value={
+                gp.website ? (
+                  <a href={gp.website} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 transition-colors truncate max-w-[200px] block">
+                    {gp.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                  </a>
+                ) : null
+              } />
+              <InfoRow label="Maps" value={
+                gp.google_maps_url ? (
+                  <a href={gp.google_maps_url} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 transition-colors text-xs">
+                    Open in Google Maps
+                  </a>
+                ) : null
+              } />
+            </div>
+          </div>
+
+          {/* Website & SSL */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h2 className="font-semibold">Website &amp; SSL</h2>
+            </div>
+            <div className="space-y-0">
+              <InfoRow label="Domain" value={web.domain} />
+              <InfoRow label="Status" value={<StatusBadge ok={web.is_live} labelTrue="Live" labelFalse="Down" />} />
+              <InfoRow label="HTTP Code" value={web.http_status} />
+              <InfoRow label="SSL" value={<StatusBadge ok={web.ssl_valid} labelTrue="Valid" labelFalse="Invalid" />} />
+              <InfoRow label="SSL Expiry" value={web.ssl_expiry} />
+            </div>
+          </div>
+
+          {/* Social Media */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 sm:p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h2 className="font-semibold">Social Media</h2>
+            </div>
+            <div className="divide-y divide-zinc-800/50">
+              <SocialLink platform="facebook" url={social.facebook} />
+              <SocialLink platform="instagram" url={social.instagram} />
+              <SocialLink platform="linkedin" url={social.linkedin} />
+              <SocialLink platform="twitter" url={social.twitter} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Meta section */}
+      <section className="pb-12 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-5">
+            <h3 className="text-xs font-semibold uppercase tracking-wide text-zinc-500 mb-3">Report Metadata</h3>
+            <div className="grid sm:grid-cols-3 gap-4 text-sm">
+              <div>
+                <span className="text-zinc-500 text-xs">Sources</span>
+                <p className="text-zinc-300 mt-0.5">
+                  {meta.sources_successful.length > 0
+                    ? meta.sources_successful.join(', ')
+                    : 'None'}
+                </p>
+              </div>
+              <div>
+                <span className="text-zinc-500 text-xs">Response Time</span>
+                <p className="text-zinc-300 mt-0.5">{(meta.duration_ms / 1000).toFixed(2)}s</p>
+              </div>
+              <div>
+                <span className="text-zinc-500 text-xs">Cached Sources</span>
+                <p className="text-zinc-300 mt-0.5">
+                  {meta.cached_sources.length > 0
+                    ? meta.cached_sources.join(', ')
+                    : 'None (fresh fetch)'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="pb-20 px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-xl sm:text-2xl font-bold mb-3">Generate Your Own Business Report</h2>
+          <p className="text-zinc-400 text-sm mb-6">
+            Look up any UK business and get company records, reviews, website health, and social profiles instantly.
+          </p>
+          <a
+            href="/tools/business-checker"
+            className="inline-block bg-emerald-500 text-black font-semibold px-8 py-3 rounded-lg hover:bg-emerald-400 transition-colors text-sm"
+          >
+            Try Business Checker
+          </a>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function ErrorPage() {
+  return (
+    <>
+      <section className="pt-28 pb-20 px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <svg className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-3">Report Not Available</h1>
+          <p className="text-zinc-400 mb-8">
+            We couldn&apos;t generate a report for this business. The business may not exist or there was an issue fetching data.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/tools/business-checker"
+              className="bg-emerald-500 text-black font-semibold px-8 py-3 rounded-lg hover:bg-emerald-400 transition-colors text-sm"
+            >
+              Try the Demo
+            </a>
+            <a
+              href="/"
+              className="border border-zinc-700 text-zinc-300 font-medium px-8 py-3 rounded-lg hover:bg-zinc-800 transition-colors text-sm"
+            >
+              Back to Home
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default async function ReportPage({ params }: PageProps) {
+  const { slug } = await params;
+  const { businessName, location } = parseSlug(slug);
+
+  let data: EnrichedBusinessProfile | null = null;
+  let failed = false;
+
+  try {
+    data = await enrichBusiness({
+      business_name: businessName,
+      location: location,
+    });
+
+    // Check if all sources failed
+    if (data.meta.sources_successful.length === 0) {
+      failed = true;
+    }
+  } catch {
+    failed = true;
+  }
+
+  return (
+    <div className="min-h-screen bg-zinc-950 text-white font-[family-name:var(--font-geist-sans)] overflow-x-hidden w-full">
+      {/* Nav */}
+      <nav className="fixed top-0 w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/50">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <a href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-black font-bold text-sm">
+              UK
+            </div>
+            <span className="font-semibold text-sm hidden sm:block">Business Intel API</span>
+          </a>
+          <div className="flex items-center gap-3 sm:gap-6 text-xs sm:text-sm">
+            <a href="/" className="text-zinc-400 hover:text-white transition-colors">Home</a>
+            <a href="/#demo" className="text-zinc-400 hover:text-white transition-colors">Demo</a>
+            <a href="/#pricing" className="text-zinc-400 hover:text-white transition-colors">Pricing</a>
+            <a href="/docs" className="text-zinc-400 hover:text-white transition-colors">Docs</a>
+          </div>
+        </div>
+      </nav>
+
+      {failed || !data ? <ErrorPage /> : <ReportContent data={data} businessName={businessName} location={location} />}
+
+      {/* Footer */}
+      <footer className="border-t border-zinc-800/50 py-12 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-emerald-500 rounded flex items-center justify-center text-black font-bold text-xs">
+              UK
+            </div>
+            <span className="text-sm text-zinc-400">Business Intelligence API</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-zinc-500">
+            <a href="/docs" className="hover:text-zinc-300 transition-colors">API Docs</a>
+            <a href="/tools/company-lookup" className="hover:text-zinc-300 transition-colors">Company Lookup</a>
+            <a href="/tools/business-checker" className="hover:text-zinc-300 transition-colors">Business Checker</a>
+            <a href="/#pricing" className="hover:text-zinc-300 transition-colors">Pricing</a>
+            <span>&copy; {new Date().getFullYear()}</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
