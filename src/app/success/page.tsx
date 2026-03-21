@@ -123,6 +123,7 @@ function SuccessContent() {
               <p className="text-red-400 text-sm font-medium mb-1">Save this key now</p>
               <p className="text-zinc-400 text-xs">
                 This key will not be shown again. Store it securely in your environment variables.
+                We&apos;ve also emailed it to you (check spam if you don&apos;t see it).
               </p>
             </div>
 

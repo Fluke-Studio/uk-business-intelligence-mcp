@@ -110,6 +110,9 @@ export default function FreeSignup({ onClose }: FreeSignupProps) {
               <p className="text-red-400 text-xs font-medium">
                 Save this key now — it won&apos;t be shown again.
               </p>
+              <p className="text-zinc-500 text-xs mt-1">
+                We&apos;ve also emailed it to you (check spam if you don&apos;t see it).
+              </p>
             </div>
 
             <button
