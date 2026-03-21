@@ -19,8 +19,38 @@ function extractDomain(url: string | null | undefined): string | null {
   }
 }
 
+function applyPlanGating(
+  profile: EnrichedBusinessProfile,
+  plan?: string
+): EnrichedBusinessProfile {
+  if (plan !== 'free') return profile;
+
+  // Free tier: only Companies House + Google Places data
+  return {
+    ...profile,
+    website: {
+      domain: profile.website.domain, // keep the domain they can see
+      is_live: null,
+      http_status: null,
+      ssl_valid: null,
+      ssl_expiry: null,
+    },
+    social: {
+      facebook: null,
+      instagram: null,
+      linkedin: null,
+      twitter: null,
+    },
+    meta: {
+      ...profile.meta,
+      sources_skipped: [...profile.meta.sources_skipped, 'dns_gated', 'social_gated'],
+    },
+  };
+}
+
 export async function enrichBusiness(
-  request: EnrichRequest
+  request: EnrichRequest,
+  plan?: string
 ): Promise<EnrichedBusinessProfile> {
   const startTime = Date.now();
   const profile = createEmptyProfile(request);
@@ -130,5 +160,5 @@ export async function enrichBusiness(
   profile.meta.enriched_at = new Date().toISOString();
   profile.meta.duration_ms = Date.now() - startTime;
 
-  return profile;
+  return applyPlanGating(profile, plan);
 }

@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 5. Orchestrate enrichment
-    const result = await enrichBusiness(parsed.data);
+    const result = await enrichBusiness(parsed.data, auth.user.plan);
 
     // 6. Log request (fire-and-forget)
     Promise.resolve(

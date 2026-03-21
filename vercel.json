@@ -13,5 +13,11 @@
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type, x-api-key" }
       ]
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/email-drip",
+      "schedule": "0 9 * * *"
+    }
   ]
 }
