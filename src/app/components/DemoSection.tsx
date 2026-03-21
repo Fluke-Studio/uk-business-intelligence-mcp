@@ -91,7 +91,7 @@ export default function DemoSection() {
   return (
     <section id="demo" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-4">See It in Action</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">See It in Action</h2>
         <p className="text-zinc-400 text-center mb-10 max-w-xl mx-auto">
           Send a business name. Get back everything.
         </p>

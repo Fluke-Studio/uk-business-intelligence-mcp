@@ -13,9 +13,20 @@ body {
   overflow-x: hidden;
 }
 
-/* Smooth scrolling for anchor links */
+/* Smooth scrolling for anchor links + prevent horizontal overflow */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Prevent any element from causing horizontal scroll */
+*, *::before, *::after {
+  max-width: 100%;
+}
+
+/* Exclude specific elements that need to overflow (code blocks inside scrollable containers) */
+pre code, pre span {
+  max-width: none;
 }
 
 /* Scrollbar styling */

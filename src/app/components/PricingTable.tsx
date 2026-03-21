@@ -72,7 +72,7 @@ export default function PricingTable() {
     <>
       <section id="pricing" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">Simple, Transparent Pricing</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">Simple, Transparent Pricing</h2>
           <p className="text-zinc-400 text-center mb-8 max-w-2xl mx-auto">
             Start free. Scale when you need to. Every plan includes all 4 data sources.
           </p>

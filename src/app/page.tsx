@@ -65,7 +65,7 @@ const steps = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-[family-name:var(--font-geist-sans)]">
+    <div className="min-h-screen bg-zinc-950 text-white font-[family-name:var(--font-geist-sans)] overflow-x-hidden w-full">
       {/* Nav */}
       <nav className="fixed top-0 w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -132,8 +132,8 @@ export default function Home() {
       {/* Problem / Solution */}
       <section className="py-20 px-6 border-t border-zinc-800/50">
         <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-12">
+            <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-5 sm:p-8">
               <h3 className="text-red-400 font-semibold mb-4 text-sm uppercase tracking-wide">The problem</h3>
               <ul className="space-y-3 text-sm text-zinc-400">
                 <li className="flex items-start gap-2">
@@ -154,7 +154,7 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-8">
+            <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-5 sm:p-8">
               <h3 className="text-emerald-400 font-semibold mb-4 text-sm uppercase tracking-wide">Our solution</h3>
               <ul className="space-y-3 text-sm text-zinc-400">
                 <li className="flex items-start gap-2">
@@ -185,7 +185,7 @@ export default function Home() {
       {/* How It Works */}
       <section className="py-24 px-6 border-t border-zinc-800/50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16">How It Works</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12 sm:mb-16">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {steps.map((step) => (
               <div key={step.number} className="text-center">
@@ -203,7 +203,7 @@ export default function Home() {
       {/* Data Sources */}
       <section id="sources" className="py-24 px-6 border-t border-zinc-800/50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">Four Data Sources, One Response</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">Four Data Sources, One Response</h2>
           <p className="text-zinc-400 text-center mb-12 max-w-xl mx-auto">
             Every lookup queries all four sources in parallel, with intelligent caching to keep costs low.
           </p>
@@ -212,16 +212,16 @@ export default function Home() {
             {dataSources.map((source) => (
               <div
                 key={source.title}
-                className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-colors"
+                className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 sm:p-6 hover:border-zinc-700 transition-colors overflow-hidden"
               >
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0">{source.icon}</div>
-                  <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="font-semibold">{source.title}</h3>
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="shrink-0 hidden sm:block">{source.icon}</div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2 flex-wrap">
+                      <h3 className="font-semibold text-sm sm:text-base">{source.title}</h3>
                       <span className="text-xs text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded">{source.cache}</span>
                     </div>
-                    <p className="text-sm text-zinc-400 leading-relaxed">{source.description}</p>
+                    <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">{source.description}</p>
                   </div>
                 </div>
               </div>
@@ -236,7 +236,7 @@ export default function Home() {
           <div className="inline-flex items-center gap-2 bg-purple-500/10 text-purple-400 text-xs font-medium px-3 py-1.5 rounded-full mb-6 border border-purple-500/20">
             MCP Compatible
           </div>
-          <h2 className="text-3xl font-bold mb-4">Works with Claude Desktop</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Works with Claude Desktop</h2>
           <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
             Ask Claude &ldquo;Is this business legit?&rdquo; and get directors, reviews, website status,
             and social profiles back instantly. One line of config, zero code.
@@ -259,16 +259,16 @@ export default function Home() {
       {/* API Reference Preview */}
       <section id="docs" className="py-24 px-6 border-t border-zinc-800/50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">API Reference</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">API Reference</h2>
           <p className="text-zinc-400 text-center mb-12">
             Simple REST API. One endpoint does everything.
           </p>
 
           <div className="space-y-6">
-            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 sm:p-6">
               <div className="flex items-center gap-3 mb-4">
                 <span className="bg-emerald-500/10 text-emerald-400 text-xs font-bold px-2.5 py-1 rounded">POST</span>
-                <code className="text-sm font-mono text-zinc-300">/api/v1/enrich</code>
+                <code className="text-xs sm:text-sm font-mono text-zinc-300 break-all">/api/v1/enrich</code>
               </div>
               <p className="text-sm text-zinc-400 mb-4">
                 Enrich a UK business. Returns a comprehensive profile from all data sources.
@@ -321,7 +321,7 @@ export default function Home() {
       {/* CTA */}
       <section className="py-24 px-6 border-t border-zinc-800/50">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Start Enriching UK Businesses Today</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Start Enriching UK Businesses Today</h2>
           <p className="text-zinc-400 mb-8">
             Your first 100 lookups are free. No card. No commitment. Just data.
           </p>
