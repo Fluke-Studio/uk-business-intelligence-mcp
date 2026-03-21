@@ -1,0 +1,22 @@
+# Source code (published as compiled dist/)
+src/
+supabase/
+docs/
+public/
+.next/
+
+# Config files
+.env*
+.gitignore
+next.config.mjs
+tsconfig.json
+tsconfig.mcp.json
+postcss.config.mjs
+tailwind.config.ts
+vercel.json
+mcp-config.example.json
+
+# Dev files
+node_modules/
+*.tsbuildinfo
+Local-Business-Intelligence-API-Launch-Plan.docx

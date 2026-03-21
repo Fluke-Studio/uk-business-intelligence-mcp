@@ -1,6 +1,20 @@
 # UK Business Intelligence API & MCP Server
 
-Unified API for enriching UK business data. Send a business name and location, get back company registration, Google ratings, website status, and social links — all in one call. Also available as an MCP server for Claude Desktop and Cursor.
+[![npm version](https://img.shields.io/npm/v/uk-business-intelligence-mcp)](https://www.npmjs.com/package/uk-business-intelligence-mcp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](https://opensource.org/licenses/MIT)
+
+Know everything about any UK business in one API call. Company records, Google reviews, website health, and social profiles — unified into a single JSON response.
+
+Also available as an **MCP server** for Claude Desktop and Cursor.
+
+### Why this over existing Companies House MCP servers?
+
+There are 3 Companies House MCP servers on GitHub — all are thin wrappers around the CH API alone. This is different:
+
+- **4 data sources in one call** — Companies House + Google Places + DNS/SSL + social media
+- **Intelligent matching** — automatically links company records to their Google Places listing
+- **Built-in caching** — 7-day cache on company data, 24hr on everything else
+- **Production-ready** — rate limiting, usage tracking, graceful degradation when sources fail
 
 ## Quick Start
 
