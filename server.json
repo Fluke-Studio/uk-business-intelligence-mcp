@@ -1,0 +1,50 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Fluke-Studio/uk-business-intelligence",
+  "description": "Enrich any UK business with Companies House, Google Places, DNS, and social data.",
+  "repository": {
+    "url": "https://github.com/Fluke-Studio/uk-business-intelligence-mcp",
+    "source": "github"
+  },
+  "version": "0.1.3",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "uk-business-intelligence-mcp",
+      "version": "0.1.3",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "Supabase project URL",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": false,
+          "name": "SUPABASE_URL"
+        },
+        {
+          "description": "Supabase service role key",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "SUPABASE_SERVICE_ROLE_KEY"
+        },
+        {
+          "description": "Companies House API key",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "COMPANIES_HOUSE_API_KEY"
+        },
+        {
+          "description": "Google Places API key",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "GOOGLE_PLACES_API_KEY"
+        }
+      ]
+    }
+  ]
+}
