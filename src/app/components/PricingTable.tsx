@@ -77,7 +77,7 @@ export default function PricingTable() {
             Start free. Scale when you need to. Every plan includes all 4 data sources.
           </p>
 
-          <div className="flex items-center justify-center gap-3 mb-12">
+          <div className="flex items-center justify-center gap-3 mb-8 sm:mb-12">
             <span className={`text-sm ${!annual ? 'text-white' : 'text-zinc-500'}`}>Monthly</span>
             <button
               onClick={() => setAnnual(!annual)}
@@ -93,7 +93,7 @@ export default function PricingTable() {
             </span>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {plans.map((plan) => {
               const displayPrice =
                 plan.price === '0' ? '0' : annual ? Math.round(Number(plan.price) * 0.8).toString() : plan.price;

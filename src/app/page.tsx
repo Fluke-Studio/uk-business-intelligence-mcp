@@ -75,9 +75,9 @@ export default function Home() {
             </div>
             <span className="font-semibold text-sm hidden sm:block">Business Intel API</span>
           </div>
-          <div className="flex items-center gap-6 text-sm">
+          <div className="flex items-center gap-3 sm:gap-6 text-xs sm:text-sm">
             <a href="#demo" className="text-zinc-400 hover:text-white transition-colors">Demo</a>
-            <a href="#sources" className="text-zinc-400 hover:text-white transition-colors">Sources</a>
+            <a href="#sources" className="text-zinc-400 hover:text-white transition-colors hidden sm:block">Sources</a>
             <a href="#pricing" className="text-zinc-400 hover:text-white transition-colors">Pricing</a>
             <a href="#docs" className="text-zinc-400 hover:text-white transition-colors">Docs</a>
           </div>
@@ -92,7 +92,7 @@ export default function Home() {
             Now with MCP support for Claude Desktop
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
             UK Business Intelligence
             <br />
             <span className="text-emerald-400">in One API Call</span>
@@ -119,11 +119,11 @@ export default function Home() {
           </div>
 
           {/* Trust indicators */}
-          <div className="flex items-center justify-center gap-8 mt-12 text-xs text-zinc-500">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-12 text-xs text-zinc-500">
             <span>100 free lookups/month</span>
-            <span className="w-1 h-1 bg-zinc-700 rounded-full" />
+            <span className="hidden sm:block w-1 h-1 bg-zinc-700 rounded-full" />
             <span>No credit card required</span>
-            <span className="w-1 h-1 bg-zinc-700 rounded-full" />
+            <span className="hidden sm:block w-1 h-1 bg-zinc-700 rounded-full" />
             <span>MCP compatible</span>
           </div>
         </div>
@@ -242,8 +242,8 @@ export default function Home() {
             and social profiles back instantly. One line of config, zero code.
           </p>
 
-          <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-6 max-w-lg mx-auto text-left">
-            <pre className="text-sm font-mono text-zinc-300">
+          <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-4 sm:p-6 max-w-lg mx-auto text-left overflow-x-auto">
+            <pre className="text-xs sm:text-sm font-mono text-zinc-300 whitespace-pre-wrap break-all">
               <code>{`npx uk-business-intelligence-mcp`}</code>
             </pre>
           </div>
@@ -291,11 +291,11 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="bg-emerald-500/10 text-emerald-400 text-xs font-bold px-2 py-0.5 rounded">POST</span>
-                  <code className="text-xs font-mono text-zinc-400">/api/v1/keys</code>
+                  <code className="text-xs font-mono text-zinc-400 break-all">/api/v1/keys</code>
                 </div>
                 <p className="text-xs text-zinc-500">Create a new API key</p>
               </div>

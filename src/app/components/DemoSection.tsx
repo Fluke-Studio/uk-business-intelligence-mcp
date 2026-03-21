@@ -97,12 +97,12 @@ export default function DemoSection() {
         </p>
 
         <div className="bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden">
-          <div className="flex border-b border-zinc-800">
+          <div className="flex border-b border-zinc-800 overflow-x-auto">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 text-sm font-medium transition-colors ${
+                className={`px-3 sm:px-6 py-3 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
                   activeTab === tab.id
                     ? 'text-emerald-400 border-b-2 border-emerald-400 bg-zinc-800/50'
                     : 'text-zinc-500 hover:text-zinc-300'
@@ -113,8 +113,8 @@ export default function DemoSection() {
             ))}
           </div>
 
-          <div className="p-6 overflow-x-auto">
-            <pre className="text-sm font-mono leading-relaxed">
+          <div className="p-3 sm:p-6 overflow-x-auto">
+            <pre className="text-xs sm:text-sm font-mono leading-relaxed whitespace-pre-wrap break-words">
               <code className="text-zinc-300">
                 {activeTab === 'request' && SAMPLE_REQUEST}
                 {activeTab === 'response' && JSON.stringify(SAMPLE_RESPONSE, null, 2)}
