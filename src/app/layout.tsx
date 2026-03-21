@@ -57,11 +57,13 @@ export default function RootLayout({
       >
         {children}
         <Script
-          defer
-          data-domain="ukbusinessintel.com"
-          src="https://plausible.io/js/script.js"
+          async
+          src="https://plausible.io/js/pa-Ut4sqePw840kvGi--hc6b.js"
           strategy="afterInteractive"
         />
+        <Script id="plausible-init" strategy="afterInteractive">
+          {`window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`}
+        </Script>
       </body>
     </html>
   );
