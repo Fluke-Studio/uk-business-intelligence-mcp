@@ -1,112 +1,96 @@
-# MCP Directory Submissions — Ready to Submit
+# MCP Directory Submissions — Status Tracker
+
+## Submission Status (as of 2026-03-21)
+
+| Directory | Status | Link/Notes |
+|-----------|--------|------------|
+| **Official MCP Registry** | **LIVE** | `io.github.Fluke-Studio/uk-business-intelligence` v0.1.3 |
+| awesome-mcp-servers (punkpeye) | PR open | [PR #3655](https://github.com/punkpeye/awesome-mcp-servers/pull/3655) — em-dash fixed, awaiting merge (~1.1k open PRs) |
+| awesome-mcp-servers (wong2) | BLOCKED | Repo has disabled pull requests entirely |
+| Glama | Listed | [glama.ai](https://glama.ai/mcp/servers/Fluke-Studio/uk-business-intelligence-mcp) — shows "cannot be installed" (stdio limitation), badge works |
+| MCP.so | Submitted | Server created, awaiting moderation |
+| PulseMCP | Pending | Auto-ingests from official MCP registry weekly |
+| MCP Hub | Not submitted | https://mcphub.io/ — JS-rendered, needs manual submission |
+| mcpmarket.com | Not submitted | Was rate-limited, retry later |
+
+---
 
 ## 1. awesome-mcp-servers (punkpeye) — LARGEST LIST
 
-**How:** Fork https://github.com/punkpeye/awesome-mcp-servers → add entry → submit PR
+**Status:** PR #3655 open, labels: `valid-name` (green), `has-glama` (green), `has-emoji` (green — was triggered by em-dash, now fixed)
 
-**Add under the "Business / Finance" or "Data" category:**
-
-```markdown
-- [UK Business Intelligence](https://github.com/Fluke-Studio/uk-business-intelligence-mcp) - Enrich any UK business with Companies House records, Google Places ratings, website/SSL status, and social media links in one call. Four data sources, single JSON response.
-```
-
-**PR Title:** `Add UK Business Intelligence MCP Server`
-
-**PR Description:**
-```
-Adds UK Business Intelligence MCP server — a unified business enrichment tool that combines Companies House, Google Places, DNS/SSL checks, and social media scraping into a single tool call.
-
-Unlike the existing Companies House MCP servers listed here (which wrap the CH API alone), this returns a complete business profile from 4 data sources with built-in caching, rate limiting, and graceful degradation.
-
-- npm: https://www.npmjs.com/package/uk-business-intelligence-mcp
-- Website: https://ukbusinessintel.com
-- GitHub: https://github.com/Fluke-Studio/uk-business-intelligence-mcp
-```
+**PR:** https://github.com/punkpeye/awesome-mcp-servers/pull/3655
 
 ---
 
-## 2. awesome-mcp-servers (wong2) — WELL-CURATED
+## 2. awesome-mcp-servers (wong2) — BLOCKED
 
-**How:** Fork https://github.com/wong2/awesome-mcp-servers → add entry → submit PR
+**Status:** Repository owner has disabled pull requests. Cannot submit.
 
-**Add under appropriate category:**
-
-```markdown
-- [UK Business Intelligence](https://github.com/Fluke-Studio/uk-business-intelligence-mcp) - Get comprehensive UK business profiles — company records, Google ratings, website health, and social links — from a single MCP tool call.
-```
-
-**PR Title:** `Add UK Business Intelligence MCP Server`
-
-**PR Description:** Same as above.
+Fork with branch ready at: https://github.com/Fluke-Studio/awesome-mcp-servers-1/tree/add-uk-business-intelligence
 
 ---
 
-## 3. Glama MCP Directory
+## 3. Official MCP Registry — LIVE
 
-**How:** Go to https://glama.ai/mcp/servers and look for "Submit" or "Add Server"
+**Published via:** `mcp-publisher` CLI with GitHub auth
 
-**Details to submit:**
-- **Name:** UK Business Intelligence
-- **Repository:** https://github.com/Fluke-Studio/uk-business-intelligence-mcp
-- **npm package:** uk-business-intelligence-mcp
-- **Description:** Enrich any UK business with Companies House records, Google Places ratings, website/SSL status, and social media links. One tool call, four data sources, complete JSON profile.
-- **Category:** Business / Data
+**Server name:** `io.github.Fluke-Studio/uk-business-intelligence`
 
----
+**Verify:** `curl "https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.Fluke-Studio/uk-business-intelligence"`
 
-## 4. PulseMCP
-
-**How:** Go to https://www.pulsemcp.com/ and look for "Submit Server" or "Add"
-
-**Details to submit:**
-- **Name:** UK Business Intelligence
-- **URL:** https://github.com/Fluke-Studio/uk-business-intelligence-mcp
-- **npm:** uk-business-intelligence-mcp
-- **Description:** Know everything about any UK business in one MCP tool call. Combines Companies House company records, Google Places ratings and reviews, website/SSL health checks, and social media links into a single enriched JSON profile. Built-in caching, rate limiting, and graceful degradation. Unlike existing Companies House MCP servers, this returns data from 4 sources — not just one.
-- **Category:** Business Intelligence / Data Enrichment
+**Files added:** `server.json` (manifest), `mcpName` field in `package.json`
 
 ---
 
-## 5. MCP Hub
+## 4. Glama MCP Directory — LISTED
 
-**How:** Go to https://mcphub.io/ and look for submission form
+**URL:** https://glama.ai/mcp/servers/Fluke-Studio/uk-business-intelligence-mcp
 
-**Details to submit:**
-- **Name:** UK Business Intelligence
-- **Repository:** https://github.com/Fluke-Studio/uk-business-intelligence-mcp
-- **Install:** `npx uk-business-intelligence-mcp`
-- **Description:** Comprehensive UK business enrichment MCP server. One tool call returns Companies House data (status, directors, SIC codes), Google Places ratings, website/SSL status, and social media links. Four data sources, single JSON response, built-in caching.
-- **Tags:** uk-business, companies-house, google-places, enrichment, business-intelligence
+**Notes:** Listed but shows "cannot be installed" with security/quality "not tested". This is expected for stdio-based servers. The badge SVG works and is used in the punkpeye PR.
 
 ---
 
-## 6. mcpmarket.com
+## 5. MCP.so — SUBMITTED
 
-**How:** Go to https://mcpmarket.com/ and look for submission form
+**Status:** Server created via web form (logged in as Fluke-Studio). Got green tick on submission but doesn't appear in "My Servers" dashboard yet. Likely in moderation queue.
 
-**Details to submit:**
+---
+
+## 6. PulseMCP — PENDING
+
+**How it works:** PulseMCP ingests from the official MCP registry daily and processes entries weekly. Since we're now in the official registry, this should auto-list within a week. No manual submission needed.
+
+**Verify:** Check https://www.pulsemcp.com/servers in a few days.
+
+---
+
+## 7. MCP Hub — NOT SUBMITTED
+
+**URL:** https://mcphub.io/
+
+**Notes:** Site is JS-rendered (WebFetch couldn't read it). Needs manual browser submission. Low priority.
+
+---
+
+## 8. mcpmarket.com — NOT SUBMITTED
+
+**URL:** https://mcpmarket.com/
+
+**Notes:** Was rate-limited (HTTP 429) when checking. Try again later.
+
+**Submission details:**
 - **Name:** UK Business Intelligence
 - **GitHub:** https://github.com/Fluke-Studio/uk-business-intelligence-mcp
 - **npm:** uk-business-intelligence-mcp
 - **Website:** https://ukbusinessintel.com
-- **Description:** The only MCP server that combines UK Companies House data with Google Places ratings, website health checks, and social media links. Send a business name and location — get back a complete profile from 4 data sources in under 2 seconds.
-- **Setup:** Add to Claude Desktop config and set environment variables for Supabase, Companies House, and Google Places API keys.
 
 ---
 
-## Tips for All Submissions
+## Next Actions
 
-- Submit during UK business hours (9am-5pm GMT) for fastest review
-- Follow each repo's contribution guidelines exactly
-- Don't submit to all directories on the same day — space them out over a week
-- After submitting, star the awesome-mcp-servers repos (shows good faith)
-- Check back in 3-5 days if PRs aren't reviewed
-
-## Submission Order (Recommended)
-
-1. **awesome-mcp-servers (punkpeye)** — highest traffic, submit first
-2. **Glama** — auto-indexes, usually fast
-3. **PulseMCP** — good discovery
-4. **awesome-mcp-servers (wong2)** — submit a few days after punkpeye
-5. **MCP Hub** — newer directory
-6. **mcpmarket.com** — newer directory
+- [ ] Check punkpeye PR #3655 in a few days — if `has-emoji` label persists, investigate further
+- [ ] Check PulseMCP in ~1 week for auto-listing from official registry
+- [ ] Retry mcpmarket.com submission
+- [ ] Try MCP Hub submission via browser
+- [ ] Check MCP.so moderation status

@@ -17,13 +17,15 @@ Send a business name and city, get back a complete JSON profile in under 2 secon
 
 The problem I was solving: if you're building anything that needs UK business data (lead gen tools, CRM enrichment, due diligence checks), you currently have two options — stitch together 4+ APIs yourself, or pay enterprise vendors £2,250+/year. I wanted something in between.
 
-It's also available as an MCP server, so Claude Desktop can look up any UK business natively.
+It's also available as an MCP server (listed in the official MCP registry), so Claude Desktop can look up any UK business natively.
 
 Free tier: 100 lookups/month, no card required.
 
 API: https://ukbusinessintel.com
 GitHub: https://github.com/Fluke-Studio/uk-business-intelligence-mcp
 npm: npx uk-business-intelligence-mcp
+
+Tech: Next.js 14, TypeScript, Supabase (Postgres), Vercel. No Redis — rate limiting uses atomic Postgres RPC functions.
 ```
 
 ---
