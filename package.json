@@ -1,6 +1,6 @@
 {
   "name": "uk-business-intelligence-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "UK Local Business Intelligence API & MCP Server — Companies House, Google Places, DNS, and social media data in one call",
   "author": "UK Business Intelligence",
   "license": "MIT",
@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/Fluke-Studio/uk-business-intelligence-mcp/issues"
   },
-  "homepage": "https://github.com/Fluke-Studio/uk-business-intelligence-mcp#readme",
+  "homepage": "https://ukbusinessintel.com",
   "keywords": [
     "mcp",
     "mcp-server",

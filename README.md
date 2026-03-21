@@ -3,6 +3,8 @@
 [![npm version](https://img.shields.io/npm/v/uk-business-intelligence-mcp)](https://www.npmjs.com/package/uk-business-intelligence-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](https://opensource.org/licenses/MIT)
 
+**[ukbusinessintel.com](https://ukbusinessintel.com)** — Get your free API key
+
 Know everything about any UK business in one API call. Company records, Google reviews, website health, and social profiles — unified into a single JSON response.
 
 Also available as an **MCP server** for Claude Desktop and Cursor.
