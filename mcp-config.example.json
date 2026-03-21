@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "uk-business-intel": {
+      "command": "npx",
+      "args": ["-y", "uk-business-intelligence-mcp"],
+      "env": {
+        "SUPABASE_URL": "https://your-project.supabase.co",
+        "SUPABASE_SERVICE_ROLE_KEY": "your-service-role-key",
+        "COMPANIES_HOUSE_API_KEY": "your-companies-house-api-key",
+        "GOOGLE_PLACES_API_KEY": "your-google-places-api-key",
+        "API_KEY_SALT": "your-random-32-character-string"
+      }
+    }
+  }
+}

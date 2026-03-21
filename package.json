@@ -1,26 +1,63 @@
 {
-  "name": "local-business-api",
+  "name": "uk-business-intelligence-mcp",
   "version": "0.1.0",
-  "private": true,
+  "description": "UK Local Business Intelligence API & MCP Server — Companies House, Google Places, DNS, and social media data in one call",
+  "author": "UK Business Intelligence",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fluke-Studio/uk-business-intelligence-mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/Fluke-Studio/uk-business-intelligence-mcp/issues"
+  },
+  "homepage": "https://github.com/Fluke-Studio/uk-business-intelligence-mcp#readme",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "companies-house",
+    "google-places",
+    "uk-business",
+    "business-intelligence",
+    "api",
+    "enrichment",
+    "claude",
+    "model-context-protocol"
+  ],
+  "bin": {
+    "uk-business-intelligence-mcp": "./dist/mcp/index.js"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:mcp": "tsc -p tsconfig.mcp.json && tsc-alias -p tsconfig.mcp.json",
+    "prepublishOnly": "npm run build:mcp",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "@supabase/supabase-js": "^2.99.3",
+    "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.35"
+    "stripe": "^20.4.1",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.35",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.35"
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5"
   }
 }
