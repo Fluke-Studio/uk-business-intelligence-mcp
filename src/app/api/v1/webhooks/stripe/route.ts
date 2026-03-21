@@ -3,6 +3,7 @@ import { getStripe } from '@/lib/config/stripe';
 import { supabase } from '@/lib/supabase/client';
 import { randomBytes, createHash } from 'crypto';
 import Stripe from 'stripe';
+import { sendApiKeyEmail } from '@/lib/services/email';
 
 function hashApiKey(rawKey: string): string {
   const salt = process.env.API_KEY_SALT || '';
@@ -111,6 +112,9 @@ export async function POST(request: NextRequest) {
           expires_at: new Date(Date.now() + 10 * 60 * 1000).toISOString(),
           created_at: new Date().toISOString(),
         });
+
+        // Send API key via email
+        sendApiKeyEmail(email, rawKey, plan).catch(() => {});
 
         console.log(`[webhook] Checkout complete: ${email} → ${plan} plan`);
         break;

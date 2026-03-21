@@ -3,6 +3,7 @@ import { randomBytes, createHash } from 'crypto';
 import { supabase } from '@/lib/supabase/client';
 import { createKeyRequestSchema } from '@/lib/schemas/request';
 import { authenticate } from '@/lib/middleware/authenticate';
+import { sendApiKeyEmail } from '@/lib/services/email';
 
 function hashApiKey(rawKey: string): string {
   const salt = process.env.API_KEY_SALT || '';
@@ -110,6 +111,9 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    // Send API key via email (fire-and-forget — don't block the response)
+    sendApiKeyEmail(email, rawKey, plan).catch(() => {});
 
     return Response.json(
       {
