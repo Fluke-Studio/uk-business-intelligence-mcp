@@ -79,7 +79,7 @@ export default function Home() {
             <a href="#demo" className="text-zinc-400 hover:text-white transition-colors">Demo</a>
             <a href="#sources" className="text-zinc-400 hover:text-white transition-colors hidden sm:block">Sources</a>
             <a href="#pricing" className="text-zinc-400 hover:text-white transition-colors">Pricing</a>
-            <a href="#docs" className="text-zinc-400 hover:text-white transition-colors">Docs</a>
+            <a href="/docs" className="text-zinc-400 hover:text-white transition-colors">Docs</a>
           </div>
         </div>
       </nav>
@@ -343,8 +343,10 @@ export default function Home() {
             </div>
             <span className="text-sm text-zinc-400">Business Intelligence API</span>
           </div>
-          <div className="flex items-center gap-6 text-sm text-zinc-500">
-            <a href="#docs" className="hover:text-zinc-300 transition-colors">API Docs</a>
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-zinc-500">
+            <a href="/docs" className="hover:text-zinc-300 transition-colors">API Docs</a>
+            <a href="/tools/company-lookup" className="hover:text-zinc-300 transition-colors">Company Lookup</a>
+            <a href="/tools/business-checker" className="hover:text-zinc-300 transition-colors">Business Checker</a>
             <a href="#pricing" className="hover:text-zinc-300 transition-colors">Pricing</a>
             <span>&copy; {new Date().getFullYear()}</span>
           </div>

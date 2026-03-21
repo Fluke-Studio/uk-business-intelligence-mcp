@@ -12,6 +12,8 @@ export default function FreeSignup({ onClose }: FreeSignupProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [copiedCurl, setCopiedCurl] = useState(false);
+  const [copiedMcp, setCopiedMcp] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,9 +49,35 @@ export default function FreeSignup({ onClose }: FreeSignupProps) {
     }
   };
 
+  const curlCommand = `curl -X POST https://ukbusinessintel.com/api/v1/enrich \\
+  -H "Content-Type: application/json" \\
+  -H "x-api-key: ${apiKey}" \\
+  -d '{"business_name": "Greggs", "location": "Newcastle"}'`;
+
+  const copyCurl = () => {
+    navigator.clipboard.writeText(curlCommand);
+    setCopiedCurl(true);
+    setTimeout(() => setCopiedCurl(false), 3000);
+  };
+
+  const mcpConfig = `{
+  "mcpServers": {
+    "uk-business-intel": {
+      "command": "npx",
+      "args": ["-y", "uk-business-intelligence-mcp"]
+    }
+  }
+}`;
+
+  const copyMcp = () => {
+    navigator.clipboard.writeText(mcpConfig);
+    setCopiedMcp(true);
+    setTimeout(() => setCopiedMcp(false), 3000);
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 w-full max-w-md relative">
+      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 w-full max-w-md relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-zinc-500 hover:text-white text-lg"
@@ -106,13 +134,48 @@ export default function FreeSignup({ onClose }: FreeSignupProps) {
               </div>
             </div>
 
-            <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-3 mb-4">
+            <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-3 mb-6">
               <p className="text-red-400 text-xs font-medium">
                 Save this key now — it won&apos;t be shown again.
               </p>
               <p className="text-zinc-500 text-xs mt-1">
                 We&apos;ve also emailed it to you (check spam if you don&apos;t see it).
               </p>
+            </div>
+
+            {/* Getting Started Section */}
+            <div className="border-t border-zinc-800 pt-5 mb-5">
+              <h4 className="text-sm font-bold text-white mb-3">Try your first lookup</h4>
+              <div className="bg-zinc-800 rounded-lg p-3 mb-2 relative">
+                <pre className="text-xs font-mono text-zinc-300 whitespace-pre-wrap break-all leading-relaxed">
+                  {curlCommand}
+                </pre>
+                <button
+                  onClick={copyCurl}
+                  className="absolute top-2 right-2 bg-zinc-700 hover:bg-zinc-600 text-white text-xs px-2.5 py-1 rounded transition-colors"
+                >
+                  {copiedCurl ? 'Copied!' : 'Copy'}
+                </button>
+              </div>
+              <p className="text-zinc-500 text-xs mb-5">
+                Paste this into your terminal to see the full enriched response.
+              </p>
+
+              <h4 className="text-sm font-bold text-white mb-3">Claude Desktop Setup</h4>
+              <p className="text-zinc-400 text-xs mb-2">
+                Add this to your <code className="text-emerald-400 bg-zinc-800 px-1 py-0.5 rounded text-xs">claude_desktop_config.json</code> to use with Claude:
+              </p>
+              <div className="bg-zinc-800 rounded-lg p-3 relative">
+                <pre className="text-xs font-mono text-zinc-300 whitespace-pre-wrap break-all leading-relaxed">
+                  {mcpConfig}
+                </pre>
+                <button
+                  onClick={copyMcp}
+                  className="absolute top-2 right-2 bg-zinc-700 hover:bg-zinc-600 text-white text-xs px-2.5 py-1 rounded transition-colors"
+                >
+                  {copiedMcp ? 'Copied!' : 'Copy'}
+                </button>
+              </div>
             </div>
 
             <button
