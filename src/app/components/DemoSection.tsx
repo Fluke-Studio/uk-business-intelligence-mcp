@@ -93,7 +93,7 @@ export default function DemoSection() {
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-4">See It in Action</h2>
         <p className="text-zinc-400 text-center mb-10 max-w-xl mx-auto">
-          One API call. Four data sources. Complete business profile.
+          Send a business name. Get back everything.
         </p>
 
         <div className="bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden">

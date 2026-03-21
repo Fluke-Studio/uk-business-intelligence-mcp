@@ -4,7 +4,7 @@ import PricingTable from './components/PricingTable';
 const dataSources = [
   {
     title: 'Companies House',
-    description: 'Company status, incorporation date, SIC codes, registered address, directors, and officers.',
+    description: 'Is this company active or dissolved? Who runs it? Where\'s it registered? Full Companies House record without touching their clunky API.',
     icon: (
       <svg aria-hidden="true" className="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -14,7 +14,7 @@ const dataSources = [
   },
   {
     title: 'Google Places',
-    description: 'Star ratings, review counts, phone numbers, website URLs, and Google Maps links.',
+    description: 'What do customers think? How do they get in touch? Star ratings, review counts, phone numbers, and Google Maps links in one call.',
     icon: (
       <svg aria-hidden="true" className="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -25,7 +25,7 @@ const dataSources = [
   },
   {
     title: 'Website & SSL',
-    description: 'Domain status, HTTP response codes, SSL certificate validity, and expiry dates.',
+    description: 'Is their website actually live? Is the SSL certificate valid or about to expire? Instant domain health check.',
     icon: (
       <svg aria-hidden="true" className="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -35,7 +35,7 @@ const dataSources = [
   },
   {
     title: 'Social Media',
-    description: 'Facebook, Instagram, LinkedIn, and Twitter/X profile links scraped from the business website.',
+    description: 'Are they active on social media? Facebook, Instagram, LinkedIn, and Twitter/X links found automatically from their website.',
     icon: (
       <svg aria-hidden="true" className="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -59,7 +59,7 @@ const steps = [
   {
     number: '3',
     title: 'Get the Full Picture',
-    description: 'Receive a comprehensive JSON profile with data from all four sources in under 2 seconds.',
+    description: 'Get back company status, star ratings, SSL health, and social links \u2014 all matched to the same business, ready to use.',
   },
 ];
 
@@ -99,8 +99,8 @@ export default function Home() {
           </h1>
 
           <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Companies House data, Google Places ratings, website status, and social media links
-            &mdash; unified into a single JSON response. Stop stitching together 4 different APIs.
+            Know everything about any UK business in under 2 seconds. Company records, reviews,
+            website health, and social profiles &mdash; one API call, one JSON response.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -138,19 +138,19 @@ export default function Home() {
               <ul className="space-y-3 text-sm text-zinc-400">
                 <li className="flex items-start gap-2">
                   <span className="text-red-400 mt-0.5">&#x2717;</span>
-                  Integrate 4+ separate APIs with different auth methods
+                  Spend days wiring up Companies House, Google Places, DNS lookups, and web scrapers
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-red-400 mt-0.5">&#x2717;</span>
-                  Match records across providers (is this the same business?)
+                  Write matching logic to figure out if two records are the same business
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-red-400 mt-0.5">&#x2717;</span>
-                  Handle rate limits, caching, and failures for each one
+                  Build your own caching, retry logic, and failure handling for each provider
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-red-400 mt-0.5">&#x2717;</span>
-                  Pay enterprise prices (&pound;2,250+/yr) for enriched data
+                  Pay enterprise vendors &pound;2,250+/year for what should be a simple lookup
                 </li>
               </ul>
             </div>
@@ -238,8 +238,8 @@ export default function Home() {
           </div>
           <h2 className="text-3xl font-bold mb-4">Works with Claude Desktop</h2>
           <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
-            Add one line to your Claude Desktop config and Claude can look up any UK business.
-            No API key management needed on the client side.
+            Ask Claude &ldquo;Is this business legit?&rdquo; and get directors, reviews, website status,
+            and social profiles back instantly. One line of config, zero code.
           </p>
 
           <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-6 max-w-lg mx-auto text-left">
@@ -321,9 +321,9 @@ export default function Home() {
       {/* CTA */}
       <section className="py-24 px-6 border-t border-zinc-800/50">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Build?</h2>
+          <h2 className="text-3xl font-bold mb-4">Start Enriching UK Businesses Today</h2>
           <p className="text-zinc-400 mb-8">
-            Get your free API key in seconds. 100 lookups/month, no credit card, no commitment.
+            Your first 100 lookups are free. No card. No commitment. Just data.
           </p>
           <a
             href="#pricing"
