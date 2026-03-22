@@ -90,18 +90,18 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 text-xs font-medium px-3 py-1.5 rounded-full mb-6 border border-emerald-500/20">
             <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-            Now with MCP support for Claude Desktop
+            60x cheaper than Endole per lookup
           </div>
 
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            UK Business Intelligence
+            Verify &amp; Enrich UK Businesses
             <br />
-            <span className="text-emerald-400">in One API Call</span>
+            <span className="text-emerald-400">in Seconds</span>
           </h1>
 
           <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Know everything about any UK business in under 2 seconds. Company records, reviews,
-            website health, and social profiles &mdash; one API call, one JSON response.
+            Company records, Google reviews, website health, and social profiles for any UK business.
+            One API call. Built for compliance teams, agencies, and developers.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -109,7 +109,7 @@ export default function Home() {
               href="#pricing"
               className="bg-emerald-500 text-black font-semibold px-8 py-3 rounded-lg hover:bg-emerald-400 transition-colors text-sm"
             >
-              Get Free API Key
+              Get Free API Key &mdash; 100 lookups/month
             </a>
             <a
               href="#demo"
@@ -121,11 +121,11 @@ export default function Home() {
 
           {/* Trust indicators */}
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-12 text-xs text-zinc-500">
-            <span>100 free lookups/month</span>
-            <span className="hidden sm:block w-1 h-1 bg-zinc-700 rounded-full" />
             <span>No credit card required</span>
             <span className="hidden sm:block w-1 h-1 bg-zinc-700 rounded-full" />
-            <span>MCP compatible</span>
+            <span>From ~1.6p per lookup</span>
+            <span className="hidden sm:block w-1 h-1 bg-zinc-700 rounded-full" />
+            <span>MCP + REST API</span>
           </div>
         </div>
       </section>
@@ -319,6 +319,115 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Use Cases */}
+      <section className="py-24 px-6 border-t border-zinc-800/50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">Built For</h2>
+          <p className="text-zinc-400 text-center mb-12 max-w-xl mx-auto">
+            From compliance verification to lead generation, one API serves every use case.
+          </p>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <h3 className="font-semibold mb-2 text-zinc-200">KYB Compliance</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Verify UK businesses for onboarding and due diligence. Check company status,
+                directors, and registered address in real time.
+              </p>
+            </div>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <h3 className="font-semibold mb-2 text-zinc-200">Digital Agencies</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Qualify leads and build prospect reports. Get Google reviews, website health,
+                and social presence alongside company records.
+              </p>
+            </div>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <h3 className="font-semibold mb-2 text-zinc-200">Accountancy Firms</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Verify client businesses, check filing status, and monitor company health.
+                Integrates into your existing workflow.
+              </p>
+            </div>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <h3 className="font-semibold mb-2 text-zinc-200">Sales Teams</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Enrich CRM records with verified company data. Know if prospects are active,
+                rated well, and have a web presence.
+              </p>
+            </div>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <h3 className="font-semibold mb-2 text-zinc-200">Developers</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                REST API and MCP server. Build business intelligence into your app with
+                one endpoint. Full docs and code examples.
+              </p>
+            </div>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <h3 className="font-semibold mb-2 text-zinc-200">Fintech &amp; RegTech</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Automated KYB checks for payment processors, lending platforms, and
+                marketplace onboarding. API-first, built for automation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Competitor pricing */}
+      <section className="py-24 px-6 border-t border-zinc-800/50">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">
+            How We Compare
+          </h2>
+          <p className="text-zinc-400 text-center mb-12 max-w-xl mx-auto">
+            Enterprise providers charge thousands. We give you more data sources for less.
+          </p>
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden overflow-x-auto">
+            <table className="w-full text-sm min-w-[500px]">
+              <thead>
+                <tr className="border-b border-zinc-800">
+                  <th className="text-left px-4 py-3 text-zinc-500 font-medium text-xs uppercase tracking-wide">Provider</th>
+                  <th className="text-left px-4 py-3 text-zinc-500 font-medium text-xs uppercase tracking-wide">Per Lookup</th>
+                  <th className="text-left px-4 py-3 text-zinc-500 font-medium text-xs uppercase tracking-wide">Free Tier</th>
+                  <th className="text-left px-4 py-3 text-zinc-500 font-medium text-xs uppercase tracking-wide">Contract</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-zinc-800/50 bg-emerald-500/5">
+                  <td className="px-4 py-3 font-medium text-emerald-400">UK Business Intel</td>
+                  <td className="px-4 py-3 text-emerald-400 font-mono text-xs font-bold">~1.6p</td>
+                  <td className="px-4 py-3 text-zinc-300">100/month</td>
+                  <td className="px-4 py-3 text-zinc-300">None</td>
+                </tr>
+                <tr className="border-b border-zinc-800/50">
+                  <td className="px-4 py-3 text-zinc-300">Endole</td>
+                  <td className="px-4 py-3 text-zinc-400 font-mono text-xs">60p&ndash;&pound;3</td>
+                  <td className="px-4 py-3 text-zinc-500">Basic only</td>
+                  <td className="px-4 py-3 text-zinc-500">No</td>
+                </tr>
+                <tr className="border-b border-zinc-800/50">
+                  <td className="px-4 py-3 text-zinc-300">OpenCorporates</td>
+                  <td className="px-4 py-3 text-zinc-400 font-mono text-xs">~&pound;4.50</td>
+                  <td className="px-4 py-3 text-zinc-500">Very limited</td>
+                  <td className="px-4 py-3 text-zinc-500">Annual</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 text-zinc-300">ZoomInfo</td>
+                  <td className="px-4 py-3 text-zinc-400 font-mono text-xs">Undisclosed</td>
+                  <td className="px-4 py-3 text-zinc-500">None</td>
+                  <td className="px-4 py-3 text-zinc-500">Annual ($15K+)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-center mt-4">
+            <a href="/compare" className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors">
+              See full comparison &rarr;
+            </a>
+          </p>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-24 px-6 border-t border-zinc-800/50">
         <div className="max-w-2xl mx-auto text-center">
@@ -348,6 +457,7 @@ export default function Home() {
             <a href="/docs" className="hover:text-zinc-300 transition-colors">API Docs</a>
             <a href="/tools/company-lookup" className="hover:text-zinc-300 transition-colors">Company Lookup</a>
             <a href="/tools/business-checker" className="hover:text-zinc-300 transition-colors">Business Checker</a>
+            <a href="/data" className="hover:text-zinc-300 transition-colors">Business Data</a>
             <a href="#pricing" className="hover:text-zinc-300 transition-colors">Pricing</a>
             <span>&copy; {new Date().getFullYear()}</span>
           </div>

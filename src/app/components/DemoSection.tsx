@@ -70,6 +70,10 @@ export default function DemoSection() {
       const data = await res.json();
       setResponseData(data);
       setDemoState('success');
+      // Track demo usage in Plausible
+      if (typeof window !== 'undefined' && 'plausible' in window) {
+        (window as unknown as { plausible: (event: string) => void }).plausible('Demo');
+      }
     } catch {
       setErrorMessage('Network error. Please check your connection and try again.');
       setDemoState('error');

@@ -15,21 +15,23 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "UK Business Intelligence API | Companies House + Google Places + DNS + Social",
+  title: "UK Business Intelligence API | Verify & Enrich UK Companies | 60x Cheaper Than Endole",
   description:
-    "Unified API for enriching UK business data. Get Companies House records, Google Places ratings, website status, and social media links in one call. Free tier available.",
+    "Verify and enrich any UK business in seconds. Companies House records, Google reviews, website health, and social media in one API call. Free tier, no contract. Built for compliance, agencies, and developers.",
   keywords: [
     "UK business API",
     "Companies House API",
-    "business intelligence",
-    "Google Places API",
-    "MCP server",
+    "business verification",
+    "KYB compliance",
+    "Endole alternative",
+    "UK company data API",
     "business enrichment",
+    "MCP server",
   ],
   openGraph: {
-    title: "UK Business Intelligence API",
+    title: "UK Business Intelligence API — Verify & Enrich UK Companies",
     description:
-      "Companies House + Google Places + DNS + Social Media in one API call. Free tier, developer-friendly pricing.",
+      "Company records, Google reviews, website health, and social media for any UK business. One API call. 60x cheaper than Endole.",
     type: "website",
     locale: "en_GB",
   },

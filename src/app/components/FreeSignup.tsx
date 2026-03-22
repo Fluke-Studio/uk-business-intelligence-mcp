@@ -31,6 +31,10 @@ export default function FreeSignup({ onClose }: FreeSignupProps) {
 
       if (data.success) {
         setApiKey(data.data.api_key);
+        // Track signup conversion in Plausible
+        if (typeof window !== 'undefined' && 'plausible' in window) {
+          (window as unknown as { plausible: (event: string) => void }).plausible('Signup');
+        }
       } else {
         setError(data.error || 'Failed to create API key');
       }
