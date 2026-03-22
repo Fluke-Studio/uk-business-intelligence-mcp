@@ -444,6 +444,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'UK Business Intelligence',
+            url: 'https://ukbusinessintel.com',
+            description: 'Unified API for verifying and enriching UK business data. Companies House records, Google Places ratings, website health, and social media in one call.',
+            sameAs: [
+              'https://github.com/Fluke-Studio/uk-business-intelligence-mcp',
+              'https://dev.to/flukestudio',
+            ],
+          }),
+        }}
+      />
+
       {/* Footer */}
       <footer className="border-t border-zinc-800/50 py-12 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">

@@ -45,6 +45,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: { canonical: 'https://ukbusinessintel.com' },
 };
 
 export default function RootLayout({

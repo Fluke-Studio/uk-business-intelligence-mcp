@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     'business intelligence API reference',
     'UK company data API',
   ],
+  alternates: { canonical: 'https://ukbusinessintel.com/docs' },
 };
 
 const sections = [

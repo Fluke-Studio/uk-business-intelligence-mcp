@@ -374,24 +374,35 @@ export default async function CityPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Dataset',
-            name: `Registered Companies in ${city.name}`,
-            description: `Business data for ${data.total_results.toLocaleString()} companies registered in ${city.name}, ${city.region}. Includes company status, SIC codes, directors, and more.`,
-            url: `https://ukbusinessintel.com/data/businesses-in-${city.slug}`,
-            creator: {
-              '@type': 'Organization',
-              name: 'UK Business Intelligence',
-              url: 'https://ukbusinessintel.com',
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'Dataset',
+              name: `Registered Companies in ${city.name}`,
+              description: `Business data for ${data.total_results.toLocaleString()} companies registered in ${city.name}, ${city.region}. Includes company status, SIC codes, directors, and more.`,
+              url: `https://ukbusinessintel.com/data/businesses-in-${city.slug}`,
+              creator: {
+                '@type': 'Organization',
+                name: 'UK Business Intelligence',
+                url: 'https://ukbusinessintel.com',
+              },
+              spatialCoverage: {
+                '@type': 'Place',
+                name: `${city.name}, ${city.region}, ${city.country}`,
+              },
+              license: 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/',
+              isBasedOn: 'https://www.gov.uk/government/organisations/companies-house',
             },
-            spatialCoverage: {
-              '@type': 'Place',
-              name: `${city.name}, ${city.region}, ${city.country}`,
+            {
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ukbusinessintel.com' },
+                { '@type': 'ListItem', position: 2, name: 'Business Data', item: 'https://ukbusinessintel.com/data' },
+                { '@type': 'ListItem', position: 3, name: `Businesses in ${city.name}`, item: `https://ukbusinessintel.com/data/businesses-in-${city.slug}` },
+              ],
             },
-            license: 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/',
-            isBasedOn: 'https://www.gov.uk/government/organisations/companies-house',
-          }),
+          ]),
         }}
       />
     </div>

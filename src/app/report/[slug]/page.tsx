@@ -40,6 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     openGraph: { title, description },
+    alternates: { canonical: `https://ukbusinessintel.com/report/${slug}` },
   };
 }
 

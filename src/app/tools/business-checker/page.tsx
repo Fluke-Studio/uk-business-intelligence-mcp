@@ -175,6 +175,7 @@ export default function BusinessCheckerPage() {
       <title>Is This UK Business Legit? Free Business Checker</title>
       <meta name="description" content="Check if a UK business is legitimate. Verify company status, Google reviews, website health, SSL certificate, and social media presence. Free business checker tool." />
       <meta name="keywords" content="check if UK business is legitimate, is this business legit, verify UK company, business checker, company verification" />
+      <link rel="canonical" href="https://ukbusinessintel.com/tools/business-checker" />
 
       <div className="min-h-screen bg-zinc-950 text-white font-[family-name:var(--font-geist-sans)] overflow-x-hidden w-full">
         {/* Nav */}

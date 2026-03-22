@@ -170,6 +170,22 @@ export default function OpenCorporatesAlternativePage() {
         </div>
       </section>
 
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ukbusinessintel.com' },
+              { '@type': 'ListItem', position: 2, name: 'Compare', item: 'https://ukbusinessintel.com/compare' },
+              { '@type': 'ListItem', position: 3, name: 'OpenCorporates Alternative', item: 'https://ukbusinessintel.com/compare/opencorporates-alternative' },
+            ],
+          }),
+        }}
+      />
+
       {/* Footer */}
       <footer className="border-t border-zinc-800/50 py-12 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">

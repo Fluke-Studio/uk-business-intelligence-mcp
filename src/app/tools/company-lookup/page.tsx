@@ -60,6 +60,7 @@ export default function CompanyLookupPage() {
       <title>Free Companies House Lookup Tool | UK Business Intelligence</title>
       <meta name="description" content="Free Companies House lookup tool. Search any UK company by name and location to get company status, directors, registered address, and more. No signup required." />
       <meta name="keywords" content="companies house lookup, companies house search, UK company search, company check, companies house free" />
+      <link rel="canonical" href="https://ukbusinessintel.com/tools/company-lookup" />
 
       <div className="min-h-screen bg-zinc-950 text-white font-[family-name:var(--font-geist-sans)] overflow-x-hidden w-full">
         {/* Nav */}
