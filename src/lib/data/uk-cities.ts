@@ -1,4 +1,4 @@
-// Top 50 UK cities/towns for programmatic SEO pages
+// 150 UK cities/towns for programmatic SEO pages
 // Slug is used in URLs: /data/businesses-in-{slug}
 
 export interface UKCity {
@@ -9,7 +9,7 @@ export interface UKCity {
 }
 
 export const UK_CITIES: UKCity[] = [
-  // Major cities
+  // === Major cities ===
   { name: 'London', slug: 'london', region: 'Greater London', country: 'England' },
   { name: 'Manchester', slug: 'manchester', region: 'Greater Manchester', country: 'England' },
   { name: 'Birmingham', slug: 'birmingham', region: 'West Midlands', country: 'England' },
@@ -20,7 +20,7 @@ export const UK_CITIES: UKCity[] = [
   { name: 'Edinburgh', slug: 'edinburgh', region: 'Edinburgh', country: 'Scotland' },
   { name: 'Sheffield', slug: 'sheffield', region: 'South Yorkshire', country: 'England' },
   { name: 'Newcastle', slug: 'newcastle', region: 'Tyne and Wear', country: 'England' },
-  // Medium cities
+  // === Medium cities ===
   { name: 'Nottingham', slug: 'nottingham', region: 'Nottinghamshire', country: 'England' },
   { name: 'Cardiff', slug: 'cardiff', region: 'South Glamorgan', country: 'Wales' },
   { name: 'Leicester', slug: 'leicester', region: 'Leicestershire', country: 'England' },
@@ -31,7 +31,7 @@ export const UK_CITIES: UKCity[] = [
   { name: 'Reading', slug: 'reading', region: 'Berkshire', country: 'England' },
   { name: 'Aberdeen', slug: 'aberdeen', region: 'Aberdeen', country: 'Scotland' },
   { name: 'Derby', slug: 'derby', region: 'Derbyshire', country: 'England' },
-  // Tech / business hubs
+  // === Tech / business hubs ===
   { name: 'Cambridge', slug: 'cambridge', region: 'Cambridgeshire', country: 'England' },
   { name: 'Oxford', slug: 'oxford', region: 'Oxfordshire', country: 'England' },
   { name: 'Milton Keynes', slug: 'milton-keynes', region: 'Buckinghamshire', country: 'England' },
@@ -42,7 +42,7 @@ export const UK_CITIES: UKCity[] = [
   { name: 'Norwich', slug: 'norwich', region: 'Norfolk', country: 'England' },
   { name: 'Plymouth', slug: 'plymouth', region: 'Devon', country: 'England' },
   { name: 'Swansea', slug: 'swansea', region: 'West Glamorgan', country: 'Wales' },
-  // Additional coverage
+  // === Batch 1 additional ===
   { name: 'Dundee', slug: 'dundee', region: 'Dundee', country: 'Scotland' },
   { name: 'Wolverhampton', slug: 'wolverhampton', region: 'West Midlands', country: 'England' },
   { name: 'Stoke-on-Trent', slug: 'stoke-on-trent', region: 'Staffordshire', country: 'England' },
@@ -63,6 +63,122 @@ export const UK_CITIES: UKCity[] = [
   { name: 'Doncaster', slug: 'doncaster', region: 'South Yorkshire', country: 'England' },
   { name: 'Huddersfield', slug: 'huddersfield', region: 'West Yorkshire', country: 'England' },
   { name: 'Wakefield', slug: 'wakefield', region: 'West Yorkshire', country: 'England' },
+  // === Batch 2: London boroughs & suburbs ===
+  { name: 'Croydon', slug: 'croydon', region: 'Greater London', country: 'England' },
+  { name: 'Bromley', slug: 'bromley', region: 'Greater London', country: 'England' },
+  { name: 'Enfield', slug: 'enfield', region: 'Greater London', country: 'England' },
+  { name: 'Ealing', slug: 'ealing', region: 'Greater London', country: 'England' },
+  { name: 'Barnet', slug: 'barnet', region: 'Greater London', country: 'England' },
+  { name: 'Hounslow', slug: 'hounslow', region: 'Greater London', country: 'England' },
+  { name: 'Ilford', slug: 'ilford', region: 'Greater London', country: 'England' },
+  { name: 'Kingston upon Thames', slug: 'kingston-upon-thames', region: 'Greater London', country: 'England' },
+  { name: 'Romford', slug: 'romford', region: 'Greater London', country: 'England' },
+  { name: 'Wimbledon', slug: 'wimbledon', region: 'Greater London', country: 'England' },
+  // === Batch 2: Northern England ===
+  { name: 'Sunderland', slug: 'sunderland', region: 'Tyne and Wear', country: 'England' },
+  { name: 'Middlesbrough', slug: 'middlesbrough', region: 'North Yorkshire', country: 'England' },
+  { name: 'Bradford', slug: 'bradford', region: 'West Yorkshire', country: 'England' },
+  { name: 'Bolton', slug: 'bolton', region: 'Greater Manchester', country: 'England' },
+  { name: 'Stockport', slug: 'stockport', region: 'Greater Manchester', country: 'England' },
+  { name: 'Oldham', slug: 'oldham', region: 'Greater Manchester', country: 'England' },
+  { name: 'Wigan', slug: 'wigan', region: 'Greater Manchester', country: 'England' },
+  { name: 'Rochdale', slug: 'rochdale', region: 'Greater Manchester', country: 'England' },
+  { name: 'Rotherham', slug: 'rotherham', region: 'South Yorkshire', country: 'England' },
+  { name: 'Barnsley', slug: 'barnsley', region: 'South Yorkshire', country: 'England' },
+  { name: 'Halifax', slug: 'halifax', region: 'West Yorkshire', country: 'England' },
+  { name: 'Harrogate', slug: 'harrogate', region: 'North Yorkshire', country: 'England' },
+  { name: 'Scarborough', slug: 'scarborough', region: 'North Yorkshire', country: 'England' },
+  { name: 'Durham', slug: 'durham', region: 'County Durham', country: 'England' },
+  { name: 'Carlisle', slug: 'carlisle', region: 'Cumbria', country: 'England' },
+  { name: 'Lancaster', slug: 'lancaster', region: 'Lancashire', country: 'England' },
+  { name: 'Burnley', slug: 'burnley', region: 'Lancashire', country: 'England' },
+  { name: 'Blackburn', slug: 'blackburn', region: 'Lancashire', country: 'England' },
+  { name: 'Birkenhead', slug: 'birkenhead', region: 'Merseyside', country: 'England' },
+  { name: 'St Helens', slug: 'st-helens', region: 'Merseyside', country: 'England' },
+  { name: 'Grimsby', slug: 'grimsby', region: 'Lincolnshire', country: 'England' },
+  { name: 'Scunthorpe', slug: 'scunthorpe', region: 'Lincolnshire', country: 'England' },
+  { name: 'Hull', slug: 'hull', region: 'East Yorkshire', country: 'England' },
+  // === Batch 2: Midlands ===
+  { name: 'Walsall', slug: 'walsall', region: 'West Midlands', country: 'England' },
+  { name: 'Dudley', slug: 'dudley', region: 'West Midlands', country: 'England' },
+  { name: 'Solihull', slug: 'solihull', region: 'West Midlands', country: 'England' },
+  { name: 'Sutton Coldfield', slug: 'sutton-coldfield', region: 'West Midlands', country: 'England' },
+  { name: 'Telford', slug: 'telford', region: 'Shropshire', country: 'England' },
+  { name: 'Shrewsbury', slug: 'shrewsbury', region: 'Shropshire', country: 'England' },
+  { name: 'Worcester', slug: 'worcester', region: 'Worcestershire', country: 'England' },
+  { name: 'Hereford', slug: 'hereford', region: 'Herefordshire', country: 'England' },
+  { name: 'Stafford', slug: 'stafford', region: 'Staffordshire', country: 'England' },
+  { name: 'Burton upon Trent', slug: 'burton-upon-trent', region: 'Staffordshire', country: 'England' },
+  { name: 'Mansfield', slug: 'mansfield', region: 'Nottinghamshire', country: 'England' },
+  { name: 'Chesterfield', slug: 'chesterfield', region: 'Derbyshire', country: 'England' },
+  { name: 'Loughborough', slug: 'loughborough', region: 'Leicestershire', country: 'England' },
+  { name: 'Corby', slug: 'corby', region: 'Northamptonshire', country: 'England' },
+  { name: 'Kettering', slug: 'kettering', region: 'Northamptonshire', country: 'England' },
+  { name: 'Rugby', slug: 'rugby', region: 'Warwickshire', country: 'England' },
+  { name: 'Warwick', slug: 'warwick', region: 'Warwickshire', country: 'England' },
+  { name: 'Leamington Spa', slug: 'leamington-spa', region: 'Warwickshire', country: 'England' },
+  { name: 'Stratford-upon-Avon', slug: 'stratford-upon-avon', region: 'Warwickshire', country: 'England' },
+  // === Batch 2: South & South East ===
+  { name: 'Portsmouth', slug: 'portsmouth', region: 'Hampshire', country: 'England' },
+  { name: 'Winchester', slug: 'winchester', region: 'Hampshire', country: 'England' },
+  { name: 'Basingstoke', slug: 'basingstoke', region: 'Hampshire', country: 'England' },
+  { name: 'Guildford', slug: 'guildford', region: 'Surrey', country: 'England' },
+  { name: 'Woking', slug: 'woking', region: 'Surrey', country: 'England' },
+  { name: 'Crawley', slug: 'crawley', region: 'West Sussex', country: 'England' },
+  { name: 'Worthing', slug: 'worthing', region: 'West Sussex', country: 'England' },
+  { name: 'Eastbourne', slug: 'eastbourne', region: 'East Sussex', country: 'England' },
+  { name: 'Hastings', slug: 'hastings', region: 'East Sussex', country: 'England' },
+  { name: 'Maidstone', slug: 'maidstone', region: 'Kent', country: 'England' },
+  { name: 'Canterbury', slug: 'canterbury', region: 'Kent', country: 'England' },
+  { name: 'Chatham', slug: 'chatham', region: 'Kent', country: 'England' },
+  { name: 'Tunbridge Wells', slug: 'tunbridge-wells', region: 'Kent', country: 'England' },
+  { name: 'Margate', slug: 'margate', region: 'Kent', country: 'England' },
+  { name: 'Slough', slug: 'slough', region: 'Berkshire', country: 'England' },
+  { name: 'Maidenhead', slug: 'maidenhead', region: 'Berkshire', country: 'England' },
+  { name: 'High Wycombe', slug: 'high-wycombe', region: 'Buckinghamshire', country: 'England' },
+  { name: 'Aylesbury', slug: 'aylesbury', region: 'Buckinghamshire', country: 'England' },
+  { name: 'St Albans', slug: 'st-albans', region: 'Hertfordshire', country: 'England' },
+  { name: 'Watford', slug: 'watford', region: 'Hertfordshire', country: 'England' },
+  { name: 'Hemel Hempstead', slug: 'hemel-hempstead', region: 'Hertfordshire', country: 'England' },
+  { name: 'Stevenage', slug: 'stevenage', region: 'Hertfordshire', country: 'England' },
+  { name: 'Chelmsford', slug: 'chelmsford', region: 'Essex', country: 'England' },
+  { name: 'Southend-on-Sea', slug: 'southend-on-sea', region: 'Essex', country: 'England' },
+  { name: 'Basildon', slug: 'basildon', region: 'Essex', country: 'England' },
+  // === Batch 2: South West ===
+  { name: 'Salisbury', slug: 'salisbury', region: 'Wiltshire', country: 'England' },
+  { name: 'Taunton', slug: 'taunton', region: 'Somerset', country: 'England' },
+  { name: 'Weston-super-Mare', slug: 'weston-super-mare', region: 'Somerset', country: 'England' },
+  { name: 'Torquay', slug: 'torquay', region: 'Devon', country: 'England' },
+  { name: 'Truro', slug: 'truro', region: 'Cornwall', country: 'England' },
+  { name: 'Poole', slug: 'poole', region: 'Dorset', country: 'England' },
+  { name: 'Dorchester', slug: 'dorchester', region: 'Dorset', country: 'England' },
+  // === Batch 2: East ===
+  { name: 'Bedford', slug: 'bedford', region: 'Bedfordshire', country: 'England' },
+  { name: 'Bury St Edmunds', slug: 'bury-st-edmunds', region: 'Suffolk', country: 'England' },
+  { name: 'Lowestoft', slug: 'lowestoft', region: 'Suffolk', country: 'England' },
+  { name: 'King\'s Lynn', slug: 'kings-lynn', region: 'Norfolk', country: 'England' },
+  { name: 'Great Yarmouth', slug: 'great-yarmouth', region: 'Norfolk', country: 'England' },
+  // === Batch 2: Scotland ===
+  { name: 'Stirling', slug: 'stirling', region: 'Stirling', country: 'Scotland' },
+  { name: 'Perth', slug: 'perth', region: 'Perth and Kinross', country: 'Scotland' },
+  { name: 'Paisley', slug: 'paisley', region: 'Renfrewshire', country: 'Scotland' },
+  { name: 'Kilmarnock', slug: 'kilmarnock', region: 'East Ayrshire', country: 'Scotland' },
+  { name: 'Ayr', slug: 'ayr', region: 'South Ayrshire', country: 'Scotland' },
+  { name: 'Falkirk', slug: 'falkirk', region: 'Falkirk', country: 'Scotland' },
+  { name: 'Dunfermline', slug: 'dunfermline', region: 'Fife', country: 'Scotland' },
+  { name: 'St Andrews', slug: 'st-andrews', region: 'Fife', country: 'Scotland' },
+  // === Batch 2: Wales ===
+  { name: 'Newport', slug: 'newport', region: 'Gwent', country: 'Wales' },
+  { name: 'Wrexham', slug: 'wrexham', region: 'Clwyd', country: 'Wales' },
+  { name: 'Bangor', slug: 'bangor', region: 'Gwynedd', country: 'Wales' },
+  { name: 'Aberystwyth', slug: 'aberystwyth', region: 'Ceredigion', country: 'Wales' },
+  { name: 'Carmarthen', slug: 'carmarthen', region: 'Carmarthenshire', country: 'Wales' },
+  { name: 'Llanelli', slug: 'llanelli', region: 'Carmarthenshire', country: 'Wales' },
+  // === Batch 2: Northern Ireland ===
+  { name: 'Derry', slug: 'derry', region: 'Londonderry', country: 'Northern Ireland' },
+  { name: 'Lisburn', slug: 'lisburn', region: 'Antrim', country: 'Northern Ireland' },
+  { name: 'Newry', slug: 'newry', region: 'Down', country: 'Northern Ireland' },
+  { name: 'Bangor', slug: 'bangor-ni', region: 'Down', country: 'Northern Ireland' },
 ];
 
 export function getCityBySlug(slug: string): UKCity | undefined {

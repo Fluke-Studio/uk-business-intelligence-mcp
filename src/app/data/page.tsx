@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import { UK_CITIES } from '@/lib/data/uk-cities';
+import { INDUSTRIES } from '@/lib/data/industries';
 
 export const metadata: Metadata = {
-  title: 'UK Business Data by City | Company Intelligence & Verification',
+  title: 'UK Business Data by City & Industry | Company Intelligence & Verification',
   description:
-    'Browse business data for 50+ UK cities. Company status, directors, SIC codes, and enriched intelligence from Companies House, Google Places, and more.',
+    'Browse business data for 150+ UK cities and 25 industries. Company status, directors, SIC codes, and enriched intelligence from Companies House, Google Places, and more.',
   openGraph: {
-    title: 'UK Business Data by City',
+    title: 'UK Business Data by City & Industry',
     description:
-      'Browse registered companies across 50+ UK cities. Powered by Companies House with Google Places enrichment.',
+      'Browse registered companies across 150+ UK cities and 25 industries. Powered by Companies House with Google Places enrichment.',
     type: 'website',
     locale: 'en_GB',
   },
@@ -55,10 +56,10 @@ export default function DataIndexPage() {
       <section className="pt-32 pb-12 px-6">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            UK Business Data by City
+            UK Business Data by City &amp; Industry
           </h1>
           <p className="text-lg text-zinc-400 max-w-3xl leading-relaxed">
-            Browse registered companies across {UK_CITIES.length} UK cities and towns.
+            Browse registered companies across {UK_CITIES.length} UK cities and {INDUSTRIES.length} industries.
             Each page shows real Companies House data with links to full business
             intelligence reports.
           </p>
@@ -96,6 +97,31 @@ export default function DataIndexPage() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Industries */}
+      <section className="px-6 pb-20">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Browse by Industry</h2>
+          <p className="text-zinc-400 mb-8">
+            Explore UK companies by sector. Each page shows real Companies House data
+            filtered by SIC code.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            {INDUSTRIES.map((ind) => (
+              <a
+                key={ind.slug}
+                href={`/data/${ind.slug}-companies-uk`}
+                className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 hover:border-emerald-500/30 hover:bg-zinc-800/50 transition-colors group"
+              >
+                <p className="text-sm font-medium text-zinc-200 group-hover:text-emerald-400 transition-colors">
+                  {ind.name}
+                </p>
+                <p className="text-xs text-zinc-500 mt-0.5">SIC {ind.sicPrefixes.join(', ')}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 

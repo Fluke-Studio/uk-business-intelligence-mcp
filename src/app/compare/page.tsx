@@ -178,28 +178,26 @@ export default function ComparePage() {
       <section className="px-6 pb-16">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-xl font-bold mb-6">Detailed Comparisons</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            <a
-              href="/compare/endole-alternative"
-              className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors group"
-            >
-              <h3 className="font-semibold text-zinc-200 group-hover:text-emerald-400 transition-colors mb-2">
-                Endole Alternative
-              </h3>
-              <p className="text-sm text-zinc-500">
-                60x cheaper per lookup. Compare features, pricing, and data coverage.
-              </p>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <a href="/compare/endole-alternative" className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors group">
+              <h3 className="font-semibold text-zinc-200 group-hover:text-emerald-400 transition-colors mb-2">Endole Alternative</h3>
+              <p className="text-sm text-zinc-500">60x cheaper per lookup. Compare features, pricing, and data coverage.</p>
             </a>
-            <a
-              href="/compare/opencorporates-alternative"
-              className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors group"
-            >
-              <h3 className="font-semibold text-zinc-200 group-hover:text-emerald-400 transition-colors mb-2">
-                OpenCorporates Alternative
-              </h3>
-              <p className="text-sm text-zinc-500">
-                Self-serve API with more data sources at a fraction of the price.
-              </p>
+            <a href="/compare/opencorporates-alternative" className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors group">
+              <h3 className="font-semibold text-zinc-200 group-hover:text-emerald-400 transition-colors mb-2">OpenCorporates Alternative</h3>
+              <p className="text-sm text-zinc-500">Self-serve API with more data sources at a fraction of the price.</p>
+            </a>
+            <a href="/compare/duedil-alternative" className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors group">
+              <h3 className="font-semibold text-zinc-200 group-hover:text-emerald-400 transition-colors mb-2">DueDil Alternative</h3>
+              <p className="text-sm text-zinc-500">No enterprise sales call. Self-serve signup with transparent pricing.</p>
+            </a>
+            <a href="/compare/companycheck-alternative" className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors group">
+              <h3 className="font-semibold text-zinc-200 group-hover:text-emerald-400 transition-colors mb-2">CompanyCheck Alternative</h3>
+              <p className="text-sm text-zinc-500">Full API access instead of website-only lookups. Four data sources.</p>
+            </a>
+            <a href="/compare/cognism-alternative" className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors group">
+              <h3 className="font-semibold text-zinc-200 group-hover:text-emerald-400 transition-colors mb-2">Cognism Alternative</h3>
+              <p className="text-sm text-zinc-500">From £0/month instead of $15,000+/year. UK-focused business data.</p>
             </a>
           </div>
         </div>
