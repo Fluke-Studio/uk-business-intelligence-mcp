@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
       mode: 'subscription',
       line_items: [{ price: priceId, quantity: 1 }],
       metadata: { plan, email },
-      success_url: `${appUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${appUrl}/success?session_id={CHECKOUT_SESSION_ID}&email=${encodeURIComponent(email)}`,
       cancel_url: `${appUrl}/#pricing`,
       allow_promotion_codes: true,
     });

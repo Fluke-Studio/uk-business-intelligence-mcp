@@ -18,9 +18,9 @@ export async function checkRateLimit(
   });
 
   if (error) {
-    // If rate limiting fails, allow the request (fail open)
+    // Fail closed — block request if rate limit check is unavailable
     console.error('Rate limit check failed:', error);
-    return { allowed: true };
+    return { allowed: false };
   }
 
   const hitCount = Array.isArray(data) ? data[0]?.hit_count : data?.hit_count;

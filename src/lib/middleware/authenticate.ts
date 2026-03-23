@@ -1,15 +1,10 @@
-import { createHash } from 'crypto';
 import { supabase } from '@/lib/supabase/client';
+import { hashApiKey } from '@/lib/security/hash';
 import { ApiKeyRecord, UserRecord } from '@/types';
 
 type AuthSuccess = { success: true; apiKeyRecord: ApiKeyRecord; user: UserRecord };
 type AuthFailure = { success: false; error: string };
 export type AuthResult = AuthSuccess | AuthFailure;
-
-function hashApiKey(rawKey: string): string {
-  const salt = process.env.API_KEY_SALT || '';
-  return createHash('sha256').update(salt + rawKey).digest('hex');
-}
 
 export async function authenticate(apiKey: string | null): Promise<AuthResult> {
   if (!apiKey) {

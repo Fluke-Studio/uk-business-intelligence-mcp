@@ -1,46 +1,35 @@
 import { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { enrichBusiness } from '@/lib/services/enrichment';
+import { supabase } from '@/lib/supabase/client';
 
-// --- In-memory IP rate limiter (5 requests per IP per day) ---
+// --- DB-backed IP rate limiter (5 requests per IP per day) ---
 
 const DAILY_LIMIT = 5;
-const DAY_MS = 24 * 60 * 60 * 1000;
 
-interface RateLimitEntry {
-  count: number;
-  resetAt: number;
+function truncateToDay(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
-const rateLimitMap = new Map<string, RateLimitEntry>();
+async function checkDemoRateLimit(ip: string): Promise<{ allowed: boolean; remaining: number }> {
+  const windowStart = truncateToDay(new Date()).toISOString();
 
-function checkDemoRateLimit(ip: string): { allowed: boolean; remaining: number } {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
+  // Reuse the existing increment_rate_limit RPC with a synthetic key
+  const { data, error } = await supabase.rpc('increment_rate_limit', {
+    p_api_key_id: `demo:${ip}`,
+    p_window_start: windowStart,
+  });
 
-  // No entry or expired — start fresh
-  if (!entry || now >= entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + DAY_MS });
-    return { allowed: true, remaining: DAILY_LIMIT - 1 };
-  }
-
-  if (entry.count >= DAILY_LIMIT) {
+  if (error) {
+    // Fail closed — block request if rate limit check is unavailable
+    console.error('Demo rate limit check failed:', error);
     return { allowed: false, remaining: 0 };
   }
 
-  entry.count += 1;
-  return { allowed: true, remaining: DAILY_LIMIT - entry.count };
+  const hitCount = Array.isArray(data) ? data[0]?.hit_count : data?.hit_count;
+  const count = hitCount || 0;
+  return { allowed: count <= DAILY_LIMIT, remaining: Math.max(0, DAILY_LIMIT - count) };
 }
-
-// Periodically purge expired entries to avoid unbounded memory growth
-setInterval(() => {
-  const now = Date.now();
-  rateLimitMap.forEach((entry, ip) => {
-    if (now >= entry.resetAt) {
-      rateLimitMap.delete(ip);
-    }
-  });
-}, DAY_MS);
 
 // --- Validation schema (inline, minimal) ---
 
@@ -76,13 +65,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 2. IP-based rate limit (no auth required)
-    const ip =
-      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-      request.headers.get('x-real-ip') ??
-      'unknown';
+    // 2. IP-based rate limit — use x-real-ip (set by Vercel, not spoofable)
+    const ip = request.headers.get('x-real-ip') ?? request.ip ?? 'unknown';
 
-    const rateCheck = checkDemoRateLimit(ip);
+    const rateCheck = await checkDemoRateLimit(ip);
     if (!rateCheck.allowed) {
       return Response.json(
         { success: false, error: 'Demo rate limit exceeded. Maximum 5 requests per day.' },

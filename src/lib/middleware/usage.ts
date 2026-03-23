@@ -22,8 +22,8 @@ export async function checkAndIncrementUsage(
 
   if (error) {
     console.error('Usage check failed:', error);
-    // Fail open — don't block legitimate requests due to DB issues
-    return { allowed: true, currentCount: 0, limit: planConfig.monthlyLimit };
+    // Fail closed — block request if usage check is unavailable
+    return { allowed: false, currentCount: planConfig.monthlyLimit, limit: planConfig.monthlyLimit };
   }
 
   const row = Array.isArray(data) ? data[0] : data;

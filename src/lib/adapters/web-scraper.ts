@@ -1,4 +1,5 @@
 import { DataSourceAdapter, AdapterInput, AdapterResult } from './types';
+import { validateDomainSafety } from '@/lib/security/ssrf-guard';
 
 interface SocialLinksData {
   facebook: string | null;
@@ -44,6 +45,12 @@ export const webScraperAdapter: DataSourceAdapter<SocialLinksData> = {
   async fetch(input: AdapterInput): Promise<AdapterResult<SocialLinksData>> {
     if (!input.domain) {
       return { success: false, data: null, source: 'scrape', cached: false, error: 'No domain provided' };
+    }
+
+    // SSRF protection: block private/reserved IP ranges
+    const safety = await validateDomainSafety(input.domain);
+    if (!safety.safe) {
+      return { success: false, data: null, source: 'scrape', cached: false, error: safety.error ?? 'Domain blocked' };
     }
 
     try {

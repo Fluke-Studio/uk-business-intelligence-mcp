@@ -1,6 +1,7 @@
 import dns from 'dns/promises';
 import tls from 'tls';
 import { DataSourceAdapter, AdapterInput, AdapterResult } from './types';
+import { validateDomainSafety } from '@/lib/security/ssrf-guard';
 
 interface DnsCheckData {
   is_live: boolean;
@@ -87,6 +88,12 @@ export const dnsCheckAdapter: DataSourceAdapter<DnsCheckData> = {
   async fetch(input: AdapterInput): Promise<AdapterResult<DnsCheckData>> {
     if (!input.domain) {
       return { success: false, data: null, source: 'dns', cached: false, error: 'No domain provided' };
+    }
+
+    // SSRF protection: block private/reserved IP ranges
+    const safety = await validateDomainSafety(input.domain);
+    if (!safety.safe) {
+      return { success: false, data: null, source: 'dns', cached: false, error: safety.error ?? 'Domain blocked' };
     }
 
     try {

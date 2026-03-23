@@ -259,7 +259,7 @@ async function sendDripEmail(
 export async function GET(request: NextRequest) {
   // Verify this is a legitimate Vercel cron request
   const authHeader = request.headers.get('authorization');
-  const cronSecret = process.env.CRON_SECRET;
+  const cronSecret = process.env.CRON_SECRET ?? '';
 
   if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
     return Response.json(

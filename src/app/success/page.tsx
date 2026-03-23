@@ -24,6 +24,7 @@ export default function SuccessPage() {
 function SuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
+  const email = searchParams.get('email');
   const [keyData, setKeyData] = useState<KeyData | null>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
@@ -42,7 +43,7 @@ function SuccessContent() {
 
     const poll = async () => {
       try {
-        const res = await fetch(`/api/v1/checkout/status?session_id=${sessionId}`);
+        const res = await fetch(`/api/v1/checkout/status?session_id=${sessionId}&email=${encodeURIComponent(email || '')}`);
         const data = await res.json();
 
         if (data.success && data.data?.api_key) {
@@ -65,7 +66,7 @@ function SuccessContent() {
     };
 
     poll();
-  }, [sessionId]);
+  }, [sessionId, email]);
 
   const copyKey = () => {
     if (keyData?.api_key) {

@@ -1,17 +1,15 @@
 import { NextRequest } from 'next/server';
-import { randomBytes, createHash } from 'crypto';
 import { supabase } from '@/lib/supabase/client';
 import { createKeyRequestSchema } from '@/lib/schemas/request';
 import { authenticate } from '@/lib/middleware/authenticate';
 import { sendApiKeyEmail } from '@/lib/services/email';
+import { hashApiKey, generateApiKey } from '@/lib/security/hash';
+import { DISPOSABLE_EMAIL_DOMAINS } from '@/lib/security/disposable-domains';
 
-function hashApiKey(rawKey: string): string {
-  const salt = process.env.API_KEY_SALT || '';
-  return createHash('sha256').update(salt + rawKey).digest('hex');
-}
+const KEY_CREATION_LIMIT_PER_HOUR = 5;
 
-function generateApiKey(): string {
-  return 'ukb_' + randomBytes(16).toString('hex');
+function truncateToHour(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours());
 }
 
 export async function OPTIONS() {
@@ -31,6 +29,41 @@ export async function POST(request: NextRequest) {
     }
 
     const { email, plan } = parsed.data;
+
+    // Block disposable email domains
+    const emailDomain = email.split('@')[1]?.toLowerCase();
+    if (emailDomain && DISPOSABLE_EMAIL_DOMAINS.has(emailDomain)) {
+      return Response.json(
+        { success: false, error: 'Please use a non-disposable email address' },
+        { status: 400 }
+      );
+    }
+
+    // IP-based rate limit on key creation (5 per hour)
+    const ip = request.headers.get('x-real-ip') ?? request.ip ?? 'unknown';
+    const windowStart = truncateToHour(new Date()).toISOString();
+
+    const { data: rlData, error: rlError } = await supabase.rpc('increment_rate_limit', {
+      p_api_key_id: `keycreate:${ip}`,
+      p_window_start: windowStart,
+    });
+
+    if (rlError) {
+      // Fail closed
+      console.error('Key creation rate limit check failed:', rlError);
+      return Response.json(
+        { success: false, error: 'Rate limit check failed. Try again later.' },
+        { status: 429 }
+      );
+    }
+
+    const hitCount = Array.isArray(rlData) ? rlData[0]?.hit_count : rlData?.hit_count;
+    if ((hitCount || 0) > KEY_CREATION_LIMIT_PER_HOUR) {
+      return Response.json(
+        { success: false, error: 'Too many key creation requests. Try again later.' },
+        { status: 429, headers: { 'Retry-After': '3600' } }
+      );
+    }
 
     // Paid plans require an active Stripe subscription
     if (plan !== 'free') {

@@ -4,6 +4,8 @@ const REQUIRED_VARS = [
   'COMPANIES_HOUSE_API_KEY',
   'GOOGLE_PLACES_API_KEY',
   'API_KEY_SALT',
+  'STRIPE_WEBHOOK_SECRET',
+  'CRON_SECRET',
 ] as const;
 
 interface EnvValidationResult {

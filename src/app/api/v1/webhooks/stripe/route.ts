@@ -1,18 +1,9 @@
 import { NextRequest } from 'next/server';
 import { getStripe } from '@/lib/config/stripe';
 import { supabase } from '@/lib/supabase/client';
-import { randomBytes, createHash } from 'crypto';
 import Stripe from 'stripe';
 import { sendApiKeyEmail } from '@/lib/services/email';
-
-function hashApiKey(rawKey: string): string {
-  const salt = process.env.API_KEY_SALT || '';
-  return createHash('sha256').update(salt + rawKey).digest('hex');
-}
-
-function generateApiKey(): string {
-  return 'ukb_' + randomBytes(16).toString('hex');
-}
+import { hashApiKey, generateApiKey } from '@/lib/security/hash';
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
@@ -104,12 +95,12 @@ export async function POST(request: NextRequest) {
         });
 
         // Store the raw key temporarily so the success page can show it
-        // Uses the checkout session ID as the lookup key, expires in 10 minutes
+        // Uses the checkout session ID as the lookup key, expires in 5 minutes
         await supabase.from('cache').upsert({
           cache_key: `checkout:${session.id}`,
           source: 'checkout',
           data: { api_key: rawKey, plan, email },
-          expires_at: new Date(Date.now() + 10 * 60 * 1000).toISOString(),
+          expires_at: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
           created_at: new Date().toISOString(),
         });
 
@@ -171,8 +162,9 @@ export async function POST(request: NextRequest) {
 
     return Response.json({ received: true });
   } catch (err) {
-    // Return 200 to prevent Stripe from retrying on unrecoverable errors
+    // Return 500 so Stripe retries with exponential backoff
+    // All operations (upsert user, insert key) are idempotent, so retries are safe
     console.error('[webhook] Error processing event:', err);
-    return Response.json({ received: true, error: 'Processing failed but acknowledged' });
+    return Response.json({ error: 'Processing failed' }, { status: 500 });
   }
 }
